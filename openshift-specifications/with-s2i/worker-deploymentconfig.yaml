@@ -1,0 +1,32 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  name: worker
+  labels:
+    app: voting-app
+spec:
+  triggers:
+  - type: ConfigChange 
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - worker
+      from:
+        kind: ImageStreamTag
+        name: worker:latest
+    type: ImageChange
+  replicas: 1
+  selector:
+    app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      securityContext:
+        runAsUser: 1001
+      containers:
+        - name: worker
+          env:
+            - name: JAVA_APP_JAR
+              value: worker-jar-with-dependencies.jar

@@ -1,0 +1,19 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: worker
+  labels:
+    app: voting-app
+spec:
+  strategy:
+    type: Docker
+  source:
+    type: Git
+    git:
+      uri: "git@gitlab.com:m.grillet/openshift-voting-app.git"
+      ref: master
+    contextDir: voting-app/worker
+  output:
+    to:
+      kind: ImageStreamTag
+      name: worker:latest

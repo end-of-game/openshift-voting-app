@@ -1,0 +1,23 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: vote-s2i
+  labels:
+    app: voting-app
+spec:
+  strategy:
+    sourceStrategy:
+      from:
+        kind: DockerImage
+        name: centos/python-38-centos7
+    type: Source
+  source:
+    type: Git
+    git:
+      uri: "git@gitlab.com:m.grillet/openshift-voting-app.git"
+      ref: master
+    contextDir: voting-app/vote/src
+  output:
+    to:
+      kind: ImageStreamTag
+      name: vote:latest

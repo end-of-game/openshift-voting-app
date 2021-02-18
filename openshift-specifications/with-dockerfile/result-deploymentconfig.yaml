@@ -1,0 +1,29 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  name: result
+  labels:
+    app: voting-app
+spec:
+  triggers:
+  - type: ConfigChange 
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - result
+      from:
+        kind: ImageStreamTag
+        name: result:latest
+    type: ImageChange
+  replicas: 1
+  selector:
+    app: result
+  template:
+    metadata:
+      labels:
+        app: result
+    spec:
+      securityContext:
+        runAsUser: 1001
+      containers:
+        - name: result

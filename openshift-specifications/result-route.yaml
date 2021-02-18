@@ -1,0 +1,12 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: result
+  labels:
+    app: voting-app
+spec:
+  to:
+    kind: Service
+    name: result
+  port:
+    targetPort: 8080

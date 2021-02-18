@@ -1,0 +1,14 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: result
+  labels:
+    app: voting-app
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: result
+  type: ClusterIP

@@ -1,0 +1,6 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: vote
+  labels:
+    app: voting-app
