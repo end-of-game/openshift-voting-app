@@ -14,7 +14,8 @@ This project contains reworked voting application from [Docker Official Samples]
 - [oc CLI](https://medium.com/r/?url=https%3A%2F%2Fmirror.openshift.com%2Fpub%2Fopenshift-v4%2Fclients%2Foc%2Flatest%2F)
 - [git](https://medium.com/r/?url=https%3A%2F%2Fgit-scm.com%2Fdownloads)
 
->I will use CodeReady Containers (crc) for this example, which is a minimal OpenShift 4 cluster able to run on your local computer. This could be an Openshift, OKD or a Minishift. At the moment, the version I use for crc is 4.6.15 and 4.6.16 for oc CLI.
+>I will use CodeReady Containers (crc) for this example, which is a minimal OpenShift 4 cluster able to run on your local computer. This could be an Openshift, OKD or a Minishift. At the moment, the version I use for crc is 4.6.15 and 4.6.16 for oc CLI. Using git repositories allows us to keep a track of what has been done, to version all yaml files, as we can do for source code.
+Using and understanding the oc client will make it possible to automate the creation and deployment of applications.
 
 ---
 
