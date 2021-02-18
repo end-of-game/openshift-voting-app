@@ -28,11 +28,14 @@ Before starting, if you don't know the basics of Openshift or Kubernetes, let me
 - [ImageStream](https://docs.openshift.com/container-platform/4.6/rest_api/image_apis/imagestream-image-openshift-io-v1.html)
 - [BuildConfig](https://docs.openshift.com/container-platform/4.6/rest_api/workloads_apis/buildconfig-build-openshift-io-v1.html)
 
-Deployments may take a few minutes, the cluster needs to pull images, to build images from Dockerfile or from Source to Image.
+The last things you should know:
+- Deployments may take a few minutes, the cluster needs to pull images, to build images from Dockerfile or from Source to Image.
+- When your deployments are performed, you can access the result and vote application through the Openshift routes and you should see something like this:
+![app](docs/img/vote-result.png)
 
 During the whole demonstration, we will use the oc client.
-Connect to your Openshift cluster by using the command `oc login <SERVER_URL>` with your credentials and replace <SERVER_URL>.
-Let's create an Openshift project and deploy redis and postgreSQL databases.
+Connect to your Openshift cluster by using the command `oc login <SERVER_URL>` with your credentials and replace <SERVER_URL> before run any command with the oc client.
+Now, let's create an Openshift project and deploy redis and postgreSQL databases.
 
 ```bash
 # Create voting-app project
@@ -87,7 +90,7 @@ $ oc apply -f openshift-specifications/with-images -n voting-app
 ```
 
 When the application is up and running, you can access the 2 microservices (vote and result) through the routes created for this purpose.
-In my case, with application running on crc, I can access to vote app at http://vote.apps-crc.testing/ and result app at http://result.apps-crc.testing/.
+In my case, with application running on crc, I can access to vote app at http://vote.apps-crc.testing/ and result app at http://result.apps-crc.testing/. Take a look at the routes that Openshift has automatically created for you based on the router configuration.
 
 
 ### 2. With Dockerfile in Git repository
