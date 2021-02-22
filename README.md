@@ -53,19 +53,19 @@ $ oc new-project voting-app
 $ oc adm policy add-scc-to-user nonroot -z default -n voting-app
 
 # Create non persistent PostgreSQL database
-$ oc process postgresql-ephemeral-template -n openshift \
+$ oc process postgresql-ephemeral -n openshift \
     -p DATABASE_SERVICE_NAME=db \
     -p POSTGRESQL_USER=postgres \
     -p POSTGRESQL_PASSWORD=postgres \
     -p POSTGRESQL_DATABASE=postgres | oc apply -f - -n voting-app
 
 # Create non persistent Redis
-$ oc process redis-ephemeral-template -n openshift \
+$ oc process redis-ephemeral -n openshift \
     -p REDIS_PASSWORD=redis | oc apply -f - -n voting-app
 ```
 
 By default, there are some templates already present on your cluster.
-But if you have errors and **postgresql-ephemeral-template** or **redis-ephemeral-template** are not available on your cluster, you can use templates located in openshift-specifications/templates:
+But if you have errors and **postgresql-ephemeral** or **redis-ephemeral** are not available on your cluster, you can use templates located in openshift-specifications/templates:
 ```bash
 # Create databases from template files
 $ oc process -f openshift-specifications/templates/postgresql-ephemeral-template.yaml \
