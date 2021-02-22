@@ -104,7 +104,7 @@ $ oc apply -f openshift-specifications/with-images -n voting-app
 ```
 
 When the application is up and running, you can access the 2 microservices (vote and result) through the routes created for this purpose.
-In my case, with application running on crc, I can access to vote app at http://vote.apps-crc.testing/ and result app at http://result.apps-crc.testing/. Take a look at the routes that Openshift has automatically created for you based on the router configuration.
+In my case, with application running on crc, I can access to vote app at http://vote-voting-app..apps-crc.testing/ and result app at http://result-voting-app..apps-crc.testing/. Take a look at the routes that Openshift has automatically created for you based on the router configuration.
 
 ### 2. With Dockerfile
 
