@@ -90,7 +90,7 @@ What we will deploy:
 
 First, we will deploy this with container images. These images can be built and stored in any registry.
 
-To change image, modify **image attribute** in YAML files located in openshift-specifications/with-images directory.
+If you want to change images, modify **image attribute** in YAML files located in openshift-specifications/with-images directory.
 For example, `image: my-registry:443/my-image:1.0`.
 
 This method is used when you have already a toolchain that build images for you and you don't want to change this operation. 
@@ -152,5 +152,3 @@ There are several ways to migrate applications, and there is not a best way to d
 Do you already have tools that build images and store them, and you don't want to migrate everything to Openshift? Then deploy your applications using your container images.
 Do you want to deploy applications from their source code? If you want to take care of a Dockerfile, choose to build your application with it. If not, Source to Image allows you to deploy already secured container images in your cluster.
 There are other solutions you can implement, a combination of Dockerfile and S2I for example, or launching CI/CD pipelines with other tools and so on.
-
-## Extra
