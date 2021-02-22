@@ -14,14 +14,17 @@ This project contains reworked voting application from [Docker Official Samples]
 - [oc CLI](https://medium.com/r/?url=https%3A%2F%2Fmirror.openshift.com%2Fpub%2Fopenshift-v4%2Fclients%2Foc%2Flatest%2F)
 - [git](https://medium.com/r/?url=https%3A%2F%2Fgit-scm.com%2Fdownloads)
 
->I will use CodeReady Containers (crc) for this example, which is a minimal OpenShift 4 cluster able to run on your local computer. This could be an Openshift, OKD or a Minishift. At the moment, the version I use for crc is 4.6.15 and 4.6.16 for oc CLI. Using git repositories allows us to keep a track of what has been done, to version all yaml files, as we can do for source code.
-Using and understanding the oc client will make it possible to automate the creation and deployment of applications.
+>I will use CodeReady Containers (crc) for this example, which is a minimal OpenShift 4 cluster able to run on your local computer. 
+This could be an Openshift (version 3 or 4), OKD (version 3 or 4) or a Minishift.
+At the moment, I use crc 4.6.15 and oc CLI 4.6.16.
+Using git repositories allows us to keep a track of what has been done, to version all YAML files, as we can do for source code.
+Using and understanding the oc CLI will make it possible to automate the creation and deployment of applications.
 
 ---
 
 ## Deploy voting-app
 
-Before starting, if you don't know the basics of Openshift or Kubernetes, let me redirect you to the official documentation of the objects that will be used in this article:
+Before starting, if you don't know the basics of Openshift or Kubernetes, let me redirect you to the official documentation of the objects that will be used, stored and versionned:
 - [Pod](https://docs.openshift.com/container-platform/4.6/rest_api/workloads_apis/pod-core-v1.html)
 - [DeploymentConfig](https://docs.openshift.com/container-platform/4.6/rest_api/workloads_apis/deploymentconfig-apps-openshift-io-v1.html)
 - [Service](https://docs.openshift.com/container-platform/4.6/rest_api/network_apis/service-core-v1.html)
@@ -34,9 +37,12 @@ The last things you should know:
 - When your deployments are performed, you can access the result and vote application through the Openshift routes and you should see something like this:
 ![app](docs/img/vote-result.png)
 
-During the whole demonstration, we will use the oc client.
-Connect to your Openshift cluster by using the command `oc login <SERVER_URL>` with your credentials and replace <SERVER_URL> before run any command with the oc client.
+---
+
+## Getting started
+
 Now, let's create an Openshift project and deploy redis and postgreSQL databases.
+Connect to your Openshift cluster by using the command `oc login <SERVER_URL>` with your credentials and replace <SERVER_URL> before run any command with the oc client.
 
 ```bash
 # Create voting-app project
@@ -77,12 +83,19 @@ Initialize voting-app project with common objects for the three different ways d
 $ oc apply -f openshift-specifications/ -n voting-app
 ```
 
+What we will deploy:
+![deployments](docs/img/deployments.png)
+
 ### 1. With container images
 
 First, we will deploy this with container images. These images can be built and stored in any registry.
-To change image, modify image attribute in yaml files located in openshift-specifications/with-images directory.
-If you want to build images and push them in a registry, you can do that as well. If you want to use images that I pushed for this article, you do not have to do anything.
+
+To change image, modify **image attribute** in YAML files located in openshift-specifications/with-images directory.
+For example, `image: my-registry:443/my-image:1.0`.
+
 This method is used when you have already a toolchain that build images for you and you don't want to change this operation. 
+
+>If you want to build images and push them in a registry, you can do that as well. If you want to use images that I pushed for this article, you do not have to do anything.
 
 Let's deploy our application:
 ```bash
@@ -93,8 +106,7 @@ $ oc apply -f openshift-specifications/with-images -n voting-app
 When the application is up and running, you can access the 2 microservices (vote and result) through the routes created for this purpose.
 In my case, with application running on crc, I can access to vote app at http://vote.apps-crc.testing/ and result app at http://result.apps-crc.testing/. Take a look at the routes that Openshift has automatically created for you based on the router configuration.
 
-
-### 2. With Dockerfile in Git repository
+### 2. With Dockerfile
 
 In a second step, we are going to deploy the same application but with some changes: use of Dockerfile in your Git repository. It's Openshift that will take care of building our images. 
 Let's update Openshift objects to try out this method and trigger container image building.
@@ -140,3 +152,5 @@ There are several ways to migrate applications, and there is not a best way to d
 Do you already have tools that build images and store them, and you don't want to migrate everything to Openshift? Then deploy your applications using your container images.
 Do you want to deploy applications from their source code? If you want to take care of a Dockerfile, choose to build your application with it. If not, Source to Image allows you to deploy already secured container images in your cluster.
 There are other solutions you can implement, a combination of Dockerfile and S2I for example, or launching CI/CD pipelines with other tools and so on.
+
+## Extra

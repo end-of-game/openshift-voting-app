@@ -10,7 +10,7 @@ spec:
   source:
     type: Git
     git:
-      uri: "git@gitlab.com:m.grillet/openshift-voting-app.git"
+      uri: "https://github.com/Treeptik/openshift-voting-app.git"
       ref: master
     contextDir: voting-app/worker
   output:
