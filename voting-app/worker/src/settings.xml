@@ -1,0 +1,12 @@
+<settings>
+  <proxies>
+   <proxy>
+      <id>proxy</id>
+      <active>true</active>
+      <protocol>http</protocol>
+      <host>proxy.rotterdam.local</host>
+      <port>8080</port>
+      <nonProxyHosts>*.rotterdam.nl|*.rotterdam.local</nonProxyHosts>
+    </proxy>
+  </proxies>
+</settings>
